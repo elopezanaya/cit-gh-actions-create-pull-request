@@ -14,7 +14,19 @@ jobs:
         uses: ./ # Uses an action in the root directory
         id: hello
         with:
-          who-to-greet: 'Mona the Octocat'
-      # Use the output from the `hello` step
+          title: 'Mona the Octocat'
+          description: 'Mona the octocat welcomes you to this repository!'
+          head: 'main'
+          base: 'main'
+          labels: 'bug, enhancement'
+          assignees: 'octocat'
+          reviewers: 'octocat'
+          team_reviewers: 'octocat'
+          owner: 'octocat'
+          repo: 'octocat'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          author: 'octocat'
+          auto-merge: 'true'
+                # Use the output from the `hello` step
       - name: Get the output time
         run: echo "The time was ${{ steps.hello.outputs.time }}"
