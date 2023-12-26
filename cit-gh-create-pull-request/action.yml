@@ -1,0 +1,86 @@
+name: 'CIT : Create pull request'
+description: 'Create a PR directly from the branch to the base'
+author: 'elopezanaya'
+
+# Add your action's branding here. This will appear on the GitHub Marketplace.
+branding:
+  icon: 'cloud-rain'
+  color: 'red'
+
+# Define your inputs here.
+inputs:
+  title:
+    description: 'title of the PR'
+    required: true
+    default: 'test'
+  
+  body:
+    description: 'title of the PR'
+    required: true
+    default: 'test'
+  
+  head:
+    description: 'title of the PR'
+    required: true
+    default: 'test'
+  
+  base:
+    description: 'title of the PR'
+    required: true
+    default: 'test'
+  
+  labels:
+    description: 'title of the PR'
+    required: true
+    default: 'test'
+  
+  assignees:
+    description: 'title of the PR'
+    required: true
+    default: 'test'
+  
+  reviewers:
+    description: 'title of the PR'
+    required: true
+    default: 'test'
+  
+  team_reviewers:
+    description: 'title of the PR'
+    required: true
+    default: 'test'
+  
+  owner:
+    description: 'title of the PR'
+    required: true
+    default: 'test'
+  
+  repo:
+    description: 'title of the PR'
+    required: true
+    default: 'test'
+  
+  token:
+    description: 'GITHUB_TOKEN'
+    default: ${{ github.token }}
+  
+  author:
+    description: 'author'
+
+  auto-merge:
+    description: 'do you fear good?'
+    default: 'false'
+    
+# Define your outputs here.
+outputs:
+  pull-request-number:
+    description: 'The pull request number'
+  pull-request-url:
+    description: 'The URL of the pull request.'
+  pull-request-operation:
+    description: 'The pull request operation performed by the action, `created`, `updated` or `closed`.'
+  pull-request-head-sha:
+    description: 'The commit SHA of the pull request branch.'
+
+runs:
+  using: node20
+  main: dist/index.js
