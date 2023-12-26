@@ -15,7 +15,7 @@ jobs:
         id: hello
         with:
           title: 'Mona the Octocat'
-          description: 'Mona the octocat welcomes you to this repository!'
+          body: 'Mona the octocat welcomes you to this repository!'
           head: 'main'
           base: 'main'
           labels: 'bug, enhancement'
