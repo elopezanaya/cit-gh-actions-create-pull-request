@@ -83,4 +83,4 @@ outputs:
 
 runs:
   using: node20
-  main: dist/index.js
+  main: cit-gh-create-pull-request/dist/index.js
