@@ -19,6 +19,8 @@ const build = async (input: CoreType) => {
     owner: input.getInput("owner"),
     repo: input.getInput("repo"),
     token: input.getInput("token"),
+    author: input.getInput("author"),
+    auto_merge: input.getInput("auto_merge") === "true",
   };
 
   return ghPayload;

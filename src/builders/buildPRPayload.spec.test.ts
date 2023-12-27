@@ -15,7 +15,9 @@ describe("buildPRPayload : testing build functionality", () => {
         .mockReturnValueOnce("los-mas-aca") // team_reviewers
         .mockReturnValueOnce("owner")
         .mockReturnValueOnce("repo")
-        .mockReturnValueOnce("token"),
+        .mockReturnValueOnce("token")
+        .mockReturnValueOnce("author")
+        .mockReturnValueOnce("true"),
     };
     const result = await build(core as any);
     expect(result).toEqual({
@@ -30,6 +32,8 @@ describe("buildPRPayload : testing build functionality", () => {
       owner: "owner",
       repo: "repo",
       token: "token",
+      author: "author",
+      auto_merge: true,
     });
   });
 
@@ -47,7 +51,9 @@ describe("buildPRPayload : testing build functionality", () => {
         .mockReturnValueOnce("los-mas-aca") // team_reviewers
         .mockReturnValueOnce("owner")
         .mockReturnValueOnce("repo")
-        .mockReturnValueOnce("token"),
+        .mockReturnValueOnce("token")
+        .mockReturnValueOnce("author")
+        .mockReturnValueOnce("true"),
     };
     const result = await build(core as any);
     expect(result).toEqual({
@@ -62,6 +68,8 @@ describe("buildPRPayload : testing build functionality", () => {
       owner: "owner",
       repo: "repo",
       token: "token",
+      author: "author",
+      auto_merge: true,
     });
   });
 });

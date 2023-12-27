@@ -21,7 +21,6 @@ export async function send(payload: GithubPayload) {
     team_reviewers: payload.team_reviewers,
     author: payload.author,
     auto_merge: payload.auto_merge,
-
   });
 
   return response;

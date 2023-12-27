@@ -53,6 +53,7 @@ inputs:
   
   author:
     description: 'Author of the changes'
+    required: true
 
   auto-merge:
     description: 'Enable branch for auto merge'
