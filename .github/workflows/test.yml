@@ -37,7 +37,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Send PR using root action
-        uses: .
+        uses: ./
         id: sendPR
         with:
           title: 'Mona the Octocat'
