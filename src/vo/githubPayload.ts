@@ -10,4 +10,6 @@ export interface GithubPayload {
   owner: string;
   repo: string;
   token: string;
+  author: string;
+  auto_merge: boolean;
 }

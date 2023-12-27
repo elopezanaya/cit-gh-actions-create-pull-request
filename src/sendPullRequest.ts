@@ -15,6 +15,13 @@ export async function send(payload: GithubPayload) {
     head: payload.head,
     base: payload.base,
     maintainer_can_modify: false,
+    labels: payload.labels,
+    assignees: payload.assignees,
+    reviewers: payload.reviewers,
+    team_reviewers: payload.team_reviewers,
+    author: payload.author,
+    auto_merge: payload.auto_merge,
+
   });
 
   return response;
