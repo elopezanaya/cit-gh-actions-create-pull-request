@@ -41,7 +41,7 @@ jobs:
         with:
           title: 'Mona the Octocat'
           body: 'Mona the octocat welcomes you to this repository!'
-          head: 'main'
+          head: ${{ steps.create_branch.outputs.branch_name }}
           base: 'main'
           labels: 'bug, enhancement'
           assignees: 'elopezanaya'
