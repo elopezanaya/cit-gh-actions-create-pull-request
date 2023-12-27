@@ -6,6 +6,26 @@ jobs:
     runs-on: ubuntu-latest
     name: A job to say hello
     steps:
+
+    - name: Checkout main branch
+    uses: actions/checkout@v2
+    with:
+      ref: main
+
+    - name: Create temporary branch
+      run: git checkout -b temp-branch-${GITHUB_RUN_ID}
+
+    - name: Create and commit text file
+      run: |
+        echo "This is a sample text file." > sample.txt
+        git add sample.txt
+        git commit -m "Add sample.txt" -a
+
+    - name: Push changes to temporary branch
+      uses: ad-m/github-push-action@master
+      with:
+        branch: temp-branch-${GITHUB_RUN_ID}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
       # To use this repository's private action,
       # you must check out the repository
       - name: Checkout
