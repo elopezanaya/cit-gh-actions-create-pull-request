@@ -30,6 +30,7 @@ jobs:
           echo "This is a sample text file." > sample.txt
           git add sample.txt
           git commit -m "Add sample.txt"
+          git push --set-upstream origin "$branch_name"
           
       - name: Checkout
         uses: actions/checkout@v4
