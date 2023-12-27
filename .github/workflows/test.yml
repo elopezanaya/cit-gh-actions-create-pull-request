@@ -8,7 +8,7 @@ permissions: write-all
 jobs:
   release:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout main branch
         uses: actions/checkout@v2
@@ -20,6 +20,8 @@ jobs:
 
       - name: Create and commit text file
         run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
           echo "This is a sample text file." > sample.txt
           git add sample.txt
           git commit -m "Add sample.txt"
