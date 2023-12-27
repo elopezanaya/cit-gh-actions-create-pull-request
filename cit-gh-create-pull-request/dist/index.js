@@ -28765,21 +28765,22 @@ function wrappy (fn, cb) {
 /***/ }),
 
 /***/ 9460:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+const Utils_1 = __nccwpck_require__(6328);
 const build = async (input) => {
     const ghPayload = {
         title: input.getInput("title"),
         body: input.getInput("body"),
         head: input.getInput("head"),
         base: input.getInput("base"),
-        labels: input.getInput("labels").split(","),
-        assignees: input.getInput("assignees").split(","),
-        reviewers: input.getInput("reviewers").split(","),
-        team_reviewers: input.getInput("team_reviewers").split(","),
+        labels: (0, Utils_1.stripStringSeparatedByCommas)(input.getInput("labels")),
+        assignees: (0, Utils_1.stripStringSeparatedByCommas)(input.getInput("assignees")),
+        reviewers: (0, Utils_1.stripStringSeparatedByCommas)(input.getInput("reviewers")),
+        team_reviewers: (0, Utils_1.stripStringSeparatedByCommas)(input.getInput("team_reviewers")),
         owner: input.getInput("owner"),
         repo: input.getInput("repo"),
         token: input.getInput("token"),
@@ -28829,13 +28830,19 @@ const buildPRPayload_1 = __importDefault(__nccwpck_require__(9460));
 const sendPullRequest_1 = __nccwpck_require__(1554); // Import the 'send' function from the appropriate module
 async function run() {
     try {
-        console.log("run");
+        core.debug("Starting action");
         const ghPayloadRequest = await (0, buildPRPayload_1.default)(core);
-        await (0, sendPullRequest_1.send)(ghPayloadRequest);
-        console.log("run : success");
+        const result = await (0, sendPullRequest_1.send)(ghPayloadRequest);
+        if (result.status !== 201) {
+            throw new Error(`Failed to create pull request. Status: ${result.status}, Message: ${result}`);
+        }
+        core.setOutput("pull_request_number", result.data.number.toString());
+        core.setOutput("pull_request_url", result.data.html_url);
+        core.setOutput("pull_request_id", result.data.id.toString());
     }
     catch (error) {
-        console.log(error);
+        core.debug("Error in action");
+        core.setFailed(error.message);
     }
 }
 exports.run = run;
@@ -28865,9 +28872,26 @@ async function send(payload) {
         base: payload.base,
         maintainer_can_modify: false,
     });
-    console.log(response);
+    return response;
 }
 exports.send = send;
+
+
+/***/ }),
+
+/***/ 6328:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.stripStringSeparatedByCommas = void 0;
+const stripStringSeparatedByCommas = (str) => {
+    if (!str)
+        return [];
+    return str.split(",").map((s) => s.trim());
+};
+exports.stripStringSeparatedByCommas = stripStringSeparatedByCommas;
 
 
 /***/ }),

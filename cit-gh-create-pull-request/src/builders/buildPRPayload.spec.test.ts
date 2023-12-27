@@ -3,18 +3,19 @@ import build from "./buildPRPayload";
 describe("buildPRPayload : testing build functionality", () => {
   it("should return a GithubPayload object", async () => {
     const core = {
-      getInput: jest.fn()
-      .mockReturnValueOnce("title")
-      .mockReturnValueOnce("body")
-      .mockReturnValueOnce("head")
-      .mockReturnValueOnce("base")
-      .mockReturnValueOnce("bug,enhancement") // labels
-      .mockReturnValueOnce("uno,dos") // assignees
-      .mockReturnValueOnce("tres,cuatro") // reviewers
-      .mockReturnValueOnce("los-mas-aca") // team_reviewers
-      .mockReturnValueOnce("owner")
-      .mockReturnValueOnce("repo")
-      .mockReturnValueOnce("token"),
+      getInput: jest
+        .fn()
+        .mockReturnValueOnce("title")
+        .mockReturnValueOnce("body")
+        .mockReturnValueOnce("head")
+        .mockReturnValueOnce("base")
+        .mockReturnValueOnce("bug,enhancement") // labels
+        .mockReturnValueOnce("uno,dos") // assignees
+        .mockReturnValueOnce("tres,cuatro") // reviewers
+        .mockReturnValueOnce("los-mas-aca") // team_reviewers
+        .mockReturnValueOnce("owner")
+        .mockReturnValueOnce("repo")
+        .mockReturnValueOnce("token"),
     };
     const result = await build(core as any);
     expect(result).toEqual({
@@ -32,21 +33,21 @@ describe("buildPRPayload : testing build functionality", () => {
     });
   });
 
-
   it("should return a GithubPayload object with empty arrays for missing fields", async () => {
     const core = {
-      getInput: jest.fn()
-      .mockReturnValueOnce("title")
-      .mockReturnValueOnce("body")
-      .mockReturnValueOnce("head")
-      .mockReturnValueOnce("base")
-      .mockReturnValueOnce("uno") // labels
-      .mockReturnValueOnce("") // assignees
-      .mockReturnValueOnce("") // reviewers
-      .mockReturnValueOnce("los-mas-aca") // team_reviewers
-      .mockReturnValueOnce("owner")
-      .mockReturnValueOnce("repo")
-      .mockReturnValueOnce("token"),
+      getInput: jest
+        .fn()
+        .mockReturnValueOnce("title")
+        .mockReturnValueOnce("body")
+        .mockReturnValueOnce("head")
+        .mockReturnValueOnce("base")
+        .mockReturnValueOnce("uno") // labels
+        .mockReturnValueOnce("") // assignees
+        .mockReturnValueOnce("") // reviewers
+        .mockReturnValueOnce("los-mas-aca") // team_reviewers
+        .mockReturnValueOnce("owner")
+        .mockReturnValueOnce("repo")
+        .mockReturnValueOnce("token"),
     };
     const result = await build(core as any);
     expect(result).toEqual({

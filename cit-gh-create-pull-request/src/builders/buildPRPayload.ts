@@ -13,7 +13,9 @@ const build = async (input: CoreType) => {
     labels: stripStringSeparatedByCommas(input.getInput("labels")),
     assignees: stripStringSeparatedByCommas(input.getInput("assignees")),
     reviewers: stripStringSeparatedByCommas(input.getInput("reviewers")),
-    team_reviewers: stripStringSeparatedByCommas(input.getInput("team_reviewers")),
+    team_reviewers: stripStringSeparatedByCommas(
+      input.getInput("team_reviewers"),
+    ),
     owner: input.getInput("owner"),
     repo: input.getInput("repo"),
     token: input.getInput("token"),
