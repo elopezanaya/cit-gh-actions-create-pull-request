@@ -37,7 +37,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Send PR using root action
-        uses: ./ # Uses an action in the root directory
+        uses: ./cit-gh-create-pull-request/
         id: sendPR
         with:
           title: 'Mona the Octocat'
@@ -51,7 +51,7 @@ jobs:
           owner: 'elopezanaya'
           repo: 'cit-gh-actions'
           token: ${{ secrets.GITHUB_TOKEN }}
-          author: 'octocat'
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           auto-merge: 'true'
 
 
