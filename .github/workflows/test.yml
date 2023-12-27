@@ -34,7 +34,7 @@ jobs:
           
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Hello world action step
+      - name: Send PR using root action
         uses: ./ # Uses an action in the root directory
         id: sendPR
         with:
