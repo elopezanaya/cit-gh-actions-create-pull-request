@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Hello world action step
         uses: ./ # Uses an action in the root directory
-        id: send PR
+        id: sendPR
         with:
           title: 'Mona the Octocat'
           body: 'Mona the octocat welcomes you to this repository!'
