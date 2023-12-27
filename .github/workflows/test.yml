@@ -53,5 +53,10 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           auto-merge: 'true'
+        -name : PrintOutput
+            run: | 
+              echo "The PR number is ${{ steps.sendPR.outputs.pull-request-number }}"
+              echo "The PR number is ${{ steps.sendPR.outputs.pull-request-url }}"
+              echo "The PR number is ${{ steps.sendPR.outputs.pull-request-id }}"
 
 
