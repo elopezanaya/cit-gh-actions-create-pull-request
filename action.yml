@@ -10,64 +10,52 @@ branding:
 # Define your inputs here.
 inputs:
   title:
-    description: 'title of the PR'
+    description: 'Title of the Pull-request'
     required: true
-    default: 'test'
   
   body:
-    description: 'title of the PR'
+    description: 'Description of the PR'
     required: true
-    default: 'test'
+    default: 'Automated PR generated via github-action'
   
   head:
-    description: 'title of the PR'
+    description: 'Branch name containing the changes'
     required: true
-    default: 'test'
   
   base:
-    description: 'title of the PR'
+    description: 'Branch name of the main code'
     required: true
-    default: 'test'
+    default: 'main'
   
   labels:
-    description: 'title of the PR'
-    required: true
-    default: 'test'
+    description: 'Label tags'
   
   assignees:
-    description: 'title of the PR'
-    required: true
-    default: 'test'
+    description: "Responsible of the task, List of user id's, separated by comma"
   
   reviewers:
-    description: 'title of the PR'
-    required: true
-    default: 'test'
+    description: "Responsible to review the changes, List of user id's, separated by comma"
   
   team_reviewers:
-    description: 'title of the PR'
-    required: true
-    default: 'test'
-  
+    description: 'Team name responsible to review the changes'
+
   owner:
-    description: 'title of the PR'
+    description: 'Owner of the repository'
     required: true
-    default: 'test'
   
   repo:
-    description: 'title of the PR'
+    description: 'Name of the repository'
     required: true
-    default: 'test'
   
   token:
     description: 'GITHUB_TOKEN'
-    default: ${{ github.token }}
+    default: ${{ github.token }}s
   
   author:
-    description: 'author'
+    description: 'Author of the changes'
 
   auto-merge:
-    description: 'do you fear good?'
+    description: 'Enable branch for auto merge'
     default: 'false'
     
 # Define your outputs here.
