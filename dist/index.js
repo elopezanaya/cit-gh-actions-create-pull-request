@@ -28784,6 +28784,8 @@ const build = async (input) => {
         owner: input.getInput("owner"),
         repo: input.getInput("repo"),
         token: input.getInput("token"),
+        author: input.getInput("author"),
+        auto_merge: input.getInput("auto_merge") === "true",
     };
     return ghPayload;
 };
@@ -28871,6 +28873,12 @@ async function send(payload) {
         head: payload.head,
         base: payload.base,
         maintainer_can_modify: false,
+        labels: payload.labels,
+        assignees: payload.assignees,
+        reviewers: payload.reviewers,
+        team_reviewers: payload.team_reviewers,
+        author: payload.author,
+        auto_merge: payload.auto_merge,
     });
     return response;
 }
