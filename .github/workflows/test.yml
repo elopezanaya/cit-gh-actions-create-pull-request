@@ -15,9 +15,10 @@ jobs:
         with:
           ref: main
 
-      - name: Create temporary branch
+      - name: Create temporary branch and chekout
+        id: create_branch
         run: | 
-          branch_name= 'temp-branch-%m-%d-%Y-%H-%M-%S'
+          branch_name="tmp-bump-$(date +'%m-%d-%Y-%H-%M-%S')"
           git checkout -b "$branch_name"
           echo "::set-output name=branch_name::$branch_name"
 
@@ -34,7 +35,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Hello world action step
         uses: ./ # Uses an action in the root directory
-        id: hello
+        id: send PR
         with:
           title: 'Mona the Octocat'
           body: 'Mona the octocat welcomes you to this repository!'
@@ -49,6 +50,5 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           author: 'octocat'
           auto-merge: 'true'
-                # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+
+
