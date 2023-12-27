@@ -49,7 +49,7 @@ jobs:
           reviewers: 'elopezanaya'
           team_reviewers: 'elopezanaya'
           owner: 'elopezanaya'
-          repo: 'cit-gh-actions'
+          repo: 'cit-gh-actions-create-pull-request'
           token: ${{ secrets.GITHUB_TOKEN }}
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           auto-merge: 'true'
