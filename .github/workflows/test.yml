@@ -40,8 +40,8 @@ jobs:
         uses: ./
         id: sendPR
         with:
-          title: 'Mona the Octocat'
-          body: 'Mona the octocat welcomes you to this repository!'
+          title: 'taco shop - pull request'
+          body: 'Taco shop is a great place to eat tacos'
           head: ${{ steps.create_branch.outputs.branch_name }}
           base: 'main'
           labels: 'bug, enhancement'
