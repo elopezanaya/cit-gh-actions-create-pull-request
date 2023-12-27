@@ -6,57 +6,57 @@ on:
       branches: [main]
       actions: write-all
 
-  jobs:
-    hello_world_job:
-      runs-on: ubuntu-latest
-      name: A job to say hello
-      steps:
-        - name: Checkout main branch
-          uses: actions/checkout@v2
-          with:
-            ref: main
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-latest
+    name: A job to say hello
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v2
+        with:
+          ref: main
 
-        - name: Create temporary branch
-          run: git checkout -b temp-branch-${GITHUB_RUN_ID}
+      - name: Create temporary branch
+        run: git checkout -b temp-branch-${GITHUB_RUN_ID}
 
-        - name: Create and commit text file
-          run: |
-            echo "This is a sample text file." > sample.txt
-            git add sample.txt
-            git commit -m "Add sample.txt"
+      - name: Create and commit text file
+        run: |
+          echo "This is a sample text file." > sample.txt
+          git add sample.txt
+          git commit -m "Add sample.txt"
 
-        - name: Push changes to temporary branch
-          uses: ad-m/github-push-action@master
-          with:
-            branch: temp-branch-${GITHUB_RUN_ID}
-            github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Push changes to temporary branch
+        uses: ad-m/github-push-action@master
+        with:
+          branch: temp-branch-${GITHUB_RUN_ID}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
-        - name: Push changes to temporary branch
-          uses: ad-m/github-push-action@master
-          with:
-            branch: temp-branch-${GITHUB_RUN_ID}
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-          # To use this repository's private action,
-          # you must check out the repository
-        - name: Checkout
-          uses: actions/checkout@v4
-        - name: Hello world action step
-          uses: ./ # Uses an action in the root directory
-          id: hello
-          with:
-            title: 'Mona the Octocat'
-            body: 'Mona the octocat welcomes you to this repository!'
-            head: 'main'
-            base: 'main'
-            labels: 'bug, enhancement'
-            assignees: 'elopezanaya'
-            reviewers: 'elopezanaya'
-            team_reviewers: 'elopezanaya'
-            owner: 'elopezanaya'
-            repo: 'cit-gh-actions'
-            token: ${{ secrets.GITHUB_TOKEN }}
-            author: 'octocat'
-            auto-merge: 'true'
-                  # Use the output from the `hello` step
-        - name: Get the output time
-          run: echo "The time was ${{ steps.hello.outputs.time }}"
+      - name: Push changes to temporary branch
+        uses: ad-m/github-push-action@master
+        with:
+          branch: temp-branch-${GITHUB_RUN_ID}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+        # To use this repository's private action,
+        # you must check out the repository
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Hello world action step
+        uses: ./ # Uses an action in the root directory
+        id: hello
+        with:
+          title: 'Mona the Octocat'
+          body: 'Mona the octocat welcomes you to this repository!'
+          head: 'main'
+          base: 'main'
+          labels: 'bug, enhancement'
+          assignees: 'elopezanaya'
+          reviewers: 'elopezanaya'
+          team_reviewers: 'elopezanaya'
+          owner: 'elopezanaya'
+          repo: 'cit-gh-actions'
+          token: ${{ secrets.GITHUB_TOKEN }}
+          author: 'octocat'
+          auto-merge: 'true'
+                # Use the output from the `hello` step
+      - name: Get the output time
+        run: echo "The time was ${{ steps.hello.outputs.time }}"
