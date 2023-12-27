@@ -48,7 +48,7 @@ jobs:
           assignees: 'elopezanaya'
           reviewers: 'elopezanaya'
           team_reviewers: 'elopezanaya'
-          owner: 'elopezanaya'
+          owner: 'ppacguquisjsddsj'
           repo: 'cit-gh-actions'
           token: ${{ secrets.GITHUB_TOKEN }}
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
