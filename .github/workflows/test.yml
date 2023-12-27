@@ -19,6 +19,8 @@ jobs:
         run: | 
           branch_name=temp-branch-%m-%d-%Y-%H-%M-%S
           git checkout -b "$branch_name"
+          echo "::set-output name=branch_name::$branch_name"
+
 
       - name: Create and commit text file
         run: |
