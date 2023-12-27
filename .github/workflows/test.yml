@@ -17,9 +17,9 @@ jobs:
 
     - name: Create and commit text file
       run: |
-        echo "This is a sample text file." > sample.txt
-        git add sample.txt
-        git commit -m "Add sample.txt" -a
+          echo "This is a sample text file." > sample.txt
+          git add sample.txt
+          git commit -m "Add sample.txt" -a
 
     - name: Push changes to temporary branch
       uses: ad-m/github-push-action@master
