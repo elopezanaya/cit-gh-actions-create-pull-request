@@ -1,5 +1,5 @@
 
-name: Create Branch and Commit File
+name: 🚀🚀🚀 Launch PR creator 📢📢📢
 on:
   workflow_dispatch:
 
@@ -29,12 +29,7 @@ jobs:
           echo "This is a sample text file." > sample.txt
           git add sample.txt
           git commit -m "Add sample.txt"
-          echo "::set-output name=branch_name::$branch_name"
           
-
-
-        # To use this repository's private action,
-        # you must check out the repository
       - name: Checkout
         uses: actions/checkout@v4
       - name: Hello world action step
