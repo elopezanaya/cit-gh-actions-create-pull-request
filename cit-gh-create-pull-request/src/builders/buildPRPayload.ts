@@ -1,5 +1,6 @@
 import * as core from "@actions/core";
 import { GithubPayload } from "../vo/githubPayload";
+import { stripStringSeparatedByCommas } from "src/utils/Utils";
 
 type CoreType = typeof core;
 
@@ -9,10 +10,10 @@ const build = async (input: CoreType) => {
     body: input.getInput("body"),
     head: input.getInput("head"),
     base: input.getInput("base"),
-    labels: input.getInput("labels").split(","),
-    assignees: input.getInput("assignees").split(","),
-    reviewers: input.getInput("reviewers").split(","),
-    team_reviewers: input.getInput("team_reviewers").split(","),
+    labels: stripStringSeparatedByCommas(input.getInput("labels")),
+    assignees: stripStringSeparatedByCommas(input.getInput("assignees")),
+    reviewers: stripStringSeparatedByCommas(input.getInput("reviewers")),
+    team_reviewers: stripStringSeparatedByCommas(input.getInput("team_reviewers")),
     owner: input.getInput("owner"),
     repo: input.getInput("repo"),
     token: input.getInput("token"),
