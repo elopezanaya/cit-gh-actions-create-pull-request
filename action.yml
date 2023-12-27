@@ -70,4 +70,4 @@ outputs:
 
 runs:
   using: node20
-  main: ./cit-gh-create-pull-request/dist/index.js
+  main: ./dist/index.js
