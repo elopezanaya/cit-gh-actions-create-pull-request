@@ -16,7 +16,9 @@ jobs:
           ref: main
 
       - name: Create temporary branch
-        run: git checkout -b temp-branch-${GITHUB_RUN_ID}
+        run: | 
+          branch_name=temp-branch-%m-%d-%Y-%H-%M-%S
+          git checkout -b "$branch_name"
 
       - name: Create and commit text file
         run: |
@@ -25,18 +27,10 @@ jobs:
           echo "This is a sample text file." > sample.txt
           git add sample.txt
           git commit -m "Add sample.txt"
+          echo "::set-output name=branch_name::$branch_name"
+          
 
-      - name: Push changes to temporary branch
-        uses: ad-m/github-push-action@master
-        with:
-          branch: temp-branch-${GITHUB_RUN_ID}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Push changes to temporary branch
-        uses: ad-m/github-push-action@master
-        with:
-          branch: temp-branch-${GITHUB_RUN_ID}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
         # To use this repository's private action,
         # you must check out the repository
       - name: Checkout
