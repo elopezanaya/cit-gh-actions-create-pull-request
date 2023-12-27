@@ -1,6 +1,6 @@
 import * as core from "@actions/core";
 import { GithubPayload } from "../vo/githubPayload";
-import { stripStringSeparatedByCommas } from "src/utils/Utils";
+import { stripStringSeparatedByCommas } from "../utils/Utils";
 
 type CoreType = typeof core;
 
