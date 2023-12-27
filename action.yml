@@ -64,10 +64,9 @@ outputs:
     description: 'The pull request number'
   pull-request-url:
     description: 'The URL of the pull request.'
-  pull-request-operation:
-    description: 'The pull request operation performed by the action, `created`, `updated` or `closed`.'
-  pull-request-head-sha:
-    description: 'The commit SHA of the pull request branch.'
+  pull-request-id:
+    description: 'Id of the PR'
+
 
 runs:
   using: node20

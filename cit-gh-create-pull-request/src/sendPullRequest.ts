@@ -17,5 +17,5 @@ export async function send(payload: GithubPayload) {
     maintainer_can_modify: false,
   });
 
-  console.log(response);
+  return response;
 }

@@ -4,11 +4,26 @@ import { send } from "./sendPullRequest"; // Import the 'send' function from the
 
 export async function run(): Promise<void> {
   try {
-    console.log("run");
+
+    core.debug("Starting action");
+
     const ghPayloadRequest = await build(core);
-    await send(ghPayloadRequest);
-    console.log("run : success");
+    const result = await send(ghPayloadRequest);
+
+    if (result.status !== 201) {
+      throw new Error(
+        `Failed to create pull request. Status: ${result.status}, Message: ${result}`
+      );
+    }
+
+    core.setOutput("pull_request_number", result.data.number.toString());
+    core.setOutput("pull_request_url", result.data.html_url);
+    core.setOutput("pull_request_id", result.data.id.toString());
+
+    
   } catch (error) {
-    console.log(error);
+
+    core.debug("Error in action");
+    core.setFailed((error as Error).message);
   }
 }

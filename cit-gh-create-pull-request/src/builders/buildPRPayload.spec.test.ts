@@ -1,6 +1,6 @@
 import build from "./buildPRPayload";
 //unit tests for buildPRPayload.ts
-describe("buildPRPayload : happy path", () => {
+describe("buildPRPayload : testing build functionality", () => {
   it("should return a GithubPayload object", async () => {
     const core = {
       getInput: jest.fn()
@@ -33,14 +33,14 @@ describe("buildPRPayload : happy path", () => {
   });
 
 
-  it("should return a GithubPayload object 2", async () => {
+  it("should return a GithubPayload object with empty arrays for missing fields", async () => {
     const core = {
       getInput: jest.fn()
       .mockReturnValueOnce("title")
       .mockReturnValueOnce("body")
       .mockReturnValueOnce("head")
       .mockReturnValueOnce("base")
-      .mockReturnValueOnce("") // labels
+      .mockReturnValueOnce("uno") // labels
       .mockReturnValueOnce("") // assignees
       .mockReturnValueOnce("") // reviewers
       .mockReturnValueOnce("los-mas-aca") // team_reviewers
@@ -54,7 +54,7 @@ describe("buildPRPayload : happy path", () => {
       body: "body",
       head: "head",
       base: "base",
-      labels: [],
+      labels: ["uno"],
       assignees: [],
       reviewers: [],
       team_reviewers: ["los-mas-aca"],
