@@ -28835,6 +28835,7 @@ async function run() {
         core.debug("Starting action");
         const ghPayloadRequest = await (0, buildPRPayload_1.default)(core);
         const result = await (0, sendPullRequest_1.send)(ghPayloadRequest);
+        core.debug("Result: " + JSON.stringify(ghPayloadRequest.labels));
         if (result.status !== 201) {
             throw new Error(`Failed to create pull request. Status: ${result.status}, Message: ${result}`);
         }

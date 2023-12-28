@@ -8,6 +8,7 @@ export async function run(): Promise<void> {
 
     const ghPayloadRequest = await build(core);
     const result = await send(ghPayloadRequest);
+    core.debug("Result: " + JSON.stringify(ghPayloadRequest.labels));
 
     if (result.status !== 201) {
       throw new Error(
