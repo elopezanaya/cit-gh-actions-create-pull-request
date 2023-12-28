@@ -4,4 +4,7 @@ export interface PRAddonsPayload {
   repo: string;
   token: string;
   issue_number: number;
+  reviewers: string[];
+  team_reviewers: string[];
+  assignees: string[];
 }

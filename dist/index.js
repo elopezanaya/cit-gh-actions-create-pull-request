@@ -28772,14 +28772,17 @@ function wrappy (fn, cb) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.buildPRAddonsPayload = void 0;
 const buildPRAddonsPayload = async (input, issueNumber) => {
-    const labelsPayload = {
+    const prAddonsPayload = {
         labels: input.labels,
         owner: input.owner,
         repo: input.repo,
         token: input.token,
         issue_number: issueNumber,
+        reviewers: input.reviewers,
+        team_reviewers: input.team_reviewers,
+        assignees: input.assignees,
     };
-    return labelsPayload;
+    return prAddonsPayload;
 };
 exports.buildPRAddonsPayload = buildPRAddonsPayload;
 exports["default"] = exports.buildPRAddonsPayload;
@@ -28957,7 +28960,7 @@ async function addAssignees(assigneesPayload) {
             owner: assigneesPayload.owner,
             repo: assigneesPayload.repo,
             issue_number: assigneesPayload.issue_number,
-            assignees: assigneesPayload.labels,
+            assignees: assigneesPayload.assignees,
         });
         return response;
     }
@@ -28976,7 +28979,7 @@ async function addReviewers(reviewersPayload) {
             owner: reviewersPayload.owner,
             repo: reviewersPayload.repo,
             pull_number: reviewersPayload.issue_number,
-            reviewers: reviewersPayload.labels,
+            reviewers: reviewersPayload.reviewers,
         });
         return response;
     }
@@ -28995,7 +28998,7 @@ async function addTeamReviewers(teamReviewersPayload) {
             owner: teamReviewersPayload.owner,
             repo: teamReviewersPayload.repo,
             pull_number: teamReviewersPayload.issue_number,
-            team_reviewers: teamReviewersPayload.labels,
+            team_reviewers: teamReviewersPayload.team_reviewers,
         });
         return response;
     }

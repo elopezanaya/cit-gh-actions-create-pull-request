@@ -60,7 +60,7 @@ export async function addAssignees(assigneesPayload: PRAddonsPayload) {
       owner: assigneesPayload.owner,
       repo: assigneesPayload.repo,
       issue_number: assigneesPayload.issue_number,
-      assignees: assigneesPayload.labels,
+      assignees: assigneesPayload.assignees,
     });
 
     return response;
@@ -81,7 +81,7 @@ export async function addReviewers(reviewersPayload: PRAddonsPayload) {
       owner: reviewersPayload.owner,
       repo: reviewersPayload.repo,
       pull_number: reviewersPayload.issue_number,
-      reviewers: reviewersPayload.labels,
+      reviewers: reviewersPayload.reviewers,
     });
 
     return response;
@@ -102,7 +102,7 @@ export async function addTeamReviewers(teamReviewersPayload: PRAddonsPayload) {
       owner: teamReviewersPayload.owner,
       repo: teamReviewersPayload.repo,
       pull_number: teamReviewersPayload.issue_number,
-      team_reviewers: teamReviewersPayload.labels,
+      team_reviewers: teamReviewersPayload.team_reviewers,
     });
 
     return response;

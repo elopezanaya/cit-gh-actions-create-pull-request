@@ -5,15 +5,18 @@ export const buildPRAddonsPayload = async (
   input: GithubPayload,
   issueNumber: number,
 ) => {
-  const labelsPayload: PRAddonsPayload = {
+  const prAddonsPayload: PRAddonsPayload = {
     labels: input.labels,
     owner: input.owner,
     repo: input.repo,
     token: input.token,
     issue_number: issueNumber,
+    reviewers: input.reviewers,
+    team_reviewers: input.team_reviewers,
+    assignees: input.assignees,
   };
 
-  return labelsPayload;
+  return prAddonsPayload;
 };
 
 export default buildPRAddonsPayload;
