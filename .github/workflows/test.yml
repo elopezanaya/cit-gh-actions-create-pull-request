@@ -47,7 +47,6 @@ jobs:
           labels: 'bug, enhancement'
           assignees: 'elopezanaya'
           reviewers: 'elopezanaya'
-          team_reviewers: 'elopezanaya'
           owner: 'elopezanaya'
           repo: 'cit-gh-actions-create-pull-request'
           token: ${{ secrets.GITHUB_TOKEN }}
