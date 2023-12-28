@@ -28764,6 +28764,29 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
+/***/ 1388:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.buildPRAddonsPayload = void 0;
+const buildPRAddonsPayload = async (input, issueNumber) => {
+    const labelsPayload = {
+        labels: input.labels,
+        owner: input.owner,
+        repo: input.repo,
+        token: input.token,
+        issue_number: issueNumber,
+    };
+    return labelsPayload;
+};
+exports.buildPRAddonsPayload = buildPRAddonsPayload;
+exports["default"] = exports.buildPRAddonsPayload;
+
+
+/***/ }),
+
 /***/ 9460:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
@@ -28830,14 +28853,35 @@ exports.run = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const buildPRPayload_1 = __importDefault(__nccwpck_require__(9460));
 const sendPullRequest_1 = __nccwpck_require__(1554); // Import the 'send' function from the appropriate module
+const builLabelsPayload_1 = __nccwpck_require__(1388);
 async function run() {
     try {
         core.debug("Starting action");
         const ghPayloadRequest = await (0, buildPRPayload_1.default)(core);
         const result = await (0, sendPullRequest_1.send)(ghPayloadRequest);
-        core.debug("Result: " + JSON.stringify(ghPayloadRequest.labels));
+        core.debug("labels: " + JSON.stringify(ghPayloadRequest.labels));
         if (result.status !== 201) {
             throw new Error(`Failed to create pull request. Status: ${result.status}, Message: ${result}`);
+        }
+        const addLabelPayload = await (0, builLabelsPayload_1.buildPRAddonsPayload)(ghPayloadRequest, result.data.number);
+        const labelsResult = await (0, sendPullRequest_1.addLabels)(addLabelPayload);
+        if (labelsResult.status !== 200) {
+            throw new Error(`Failed to add labels request. Status: ${result.status}, Message: ${result}`);
+        }
+        const addAssigneesPayload = await (0, builLabelsPayload_1.buildPRAddonsPayload)(ghPayloadRequest, result.data.number);
+        const assignesResult = await (0, sendPullRequest_1.addAssignees)(addAssigneesPayload);
+        if (assignesResult.status !== 201) {
+            throw new Error(`Failed to create pull request. Status: ${result.status}, Message: ${result}`);
+        }
+        const addReviewersPayload = await (0, builLabelsPayload_1.buildPRAddonsPayload)(ghPayloadRequest, result.data.number);
+        const reviewersResult = await (0, sendPullRequest_1.addReviewers)(addReviewersPayload);
+        if (reviewersResult.status !== 201) {
+            throw new Error(`Failed to add individual reviewers pull request. Status: ${result.status}, Message: ${result}`);
+        }
+        const addTeamReviewersPayload = await (0, builLabelsPayload_1.buildPRAddonsPayload)(ghPayloadRequest, result.data.number);
+        const teamReviewersResult = await (0, sendPullRequest_1.addReviewers)(addTeamReviewersPayload);
+        if (teamReviewersResult.status !== 201) {
+            throw new Error(`Failed to add team reviewers. Status: ${result.status}, Message: ${result}`);
         }
         core.setOutput("pull_request_number", result.data.number.toString());
         core.setOutput("pull_request_url", result.data.html_url);
@@ -28859,7 +28903,7 @@ exports.run = run;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.send = void 0;
+exports.addTeamReviewers = exports.addReviewers = exports.addAssignees = exports.addLabels = exports.send = void 0;
 const rest_1 = __nccwpck_require__(5375); // Import the necessary module
 async function send(payload) {
     console.log("send");
@@ -28884,6 +28928,82 @@ async function send(payload) {
     return response;
 }
 exports.send = send;
+async function addLabels(labelsPayload) {
+    try {
+        console.log("addLabels");
+        const octokit = new rest_1.Octokit({
+            auth: labelsPayload.token,
+        });
+        const response = await octokit.issues.addLabels({
+            owner: labelsPayload.owner,
+            repo: labelsPayload.repo,
+            issue_number: labelsPayload.issue_number,
+            labels: labelsPayload.labels,
+        });
+        return response;
+    }
+    catch (error) {
+        throw error;
+    }
+}
+exports.addLabels = addLabels;
+async function addAssignees(assigneesPayload) {
+    try {
+        console.log("addAssignees");
+        const octokit = new rest_1.Octokit({
+            auth: assigneesPayload.token,
+        });
+        const response = await octokit.issues.addAssignees({
+            owner: assigneesPayload.owner,
+            repo: assigneesPayload.repo,
+            issue_number: assigneesPayload.issue_number,
+            assignees: assigneesPayload.labels,
+        });
+        return response;
+    }
+    catch (error) {
+        throw error;
+    }
+}
+exports.addAssignees = addAssignees;
+async function addReviewers(reviewersPayload) {
+    try {
+        console.log("addReviewers");
+        const octokit = new rest_1.Octokit({
+            auth: reviewersPayload.token,
+        });
+        const response = await octokit.pulls.requestReviewers({
+            owner: reviewersPayload.owner,
+            repo: reviewersPayload.repo,
+            pull_number: reviewersPayload.issue_number,
+            reviewers: reviewersPayload.labels,
+        });
+        return response;
+    }
+    catch (error) {
+        throw error;
+    }
+}
+exports.addReviewers = addReviewers;
+async function addTeamReviewers(teamReviewersPayload) {
+    try {
+        console.log("addTeamReviewers");
+        const octokit = new rest_1.Octokit({
+            auth: teamReviewersPayload.token,
+        });
+        const response = await octokit.pulls.requestReviewers({
+            owner: teamReviewersPayload.owner,
+            repo: teamReviewersPayload.repo,
+            pull_number: teamReviewersPayload.issue_number,
+            team_reviewers: teamReviewersPayload.labels,
+        });
+        return response;
+    }
+    catch (error) {
+        throw error;
+    }
+}
+exports.addTeamReviewers = addTeamReviewers;
 
 
 /***/ }),

@@ -17,7 +17,10 @@ export async function run(): Promise<void> {
       );
     }
 
-    const addLabelPayload = await buildPRAddonsPayload(ghPayloadRequest, result.data.number);
+    const addLabelPayload = await buildPRAddonsPayload(
+      ghPayloadRequest,
+      result.data.number,
+    );
     const labelsResult = await addLabels(addLabelPayload);
     if (labelsResult.status !== 200) {
       throw new Error(
@@ -25,8 +28,10 @@ export async function run(): Promise<void> {
       );
     }
 
-
-    const addAssigneesPayload = await buildPRAddonsPayload(ghPayloadRequest, result.data.number);
+    const addAssigneesPayload = await buildPRAddonsPayload(
+      ghPayloadRequest,
+      result.data.number,
+    );
     const assignesResult = await addAssignees(addAssigneesPayload);
     if (assignesResult.status !== 201) {
       throw new Error(
@@ -34,7 +39,10 @@ export async function run(): Promise<void> {
       );
     }
 
-    const addReviewersPayload = await buildPRAddonsPayload(ghPayloadRequest, result.data.number);
+    const addReviewersPayload = await buildPRAddonsPayload(
+      ghPayloadRequest,
+      result.data.number,
+    );
     const reviewersResult = await addReviewers(addReviewersPayload);
     if (reviewersResult.status !== 201) {
       throw new Error(
@@ -42,7 +50,10 @@ export async function run(): Promise<void> {
       );
     }
 
-    const addTeamReviewersPayload = await buildPRAddonsPayload(ghPayloadRequest, result.data.number);
+    const addTeamReviewersPayload = await buildPRAddonsPayload(
+      ghPayloadRequest,
+      result.data.number,
+    );
     const teamReviewersResult = await addReviewers(addTeamReviewersPayload);
     if (teamReviewersResult.status !== 201) {
       throw new Error(
