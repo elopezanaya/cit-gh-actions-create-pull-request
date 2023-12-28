@@ -28866,29 +28866,29 @@ async function run() {
         const addLabelPayload = await (0, builLabelsPayload_1.buildPRAddonsPayload)(ghPayloadRequest, result.data.number);
         const labelsResult = await (0, sendPullRequest_1.addLabels)(addLabelPayload);
         if (labelsResult.status !== 200) {
-            throw new Error(`Failed to add labels request. Status: ${result.status}, Message: ${result}`);
+            core.error("ERROR : Addinng labels : " + labelsResult);
         }
         const addAssigneesPayload = await (0, builLabelsPayload_1.buildPRAddonsPayload)(ghPayloadRequest, result.data.number);
         const assignesResult = await (0, sendPullRequest_1.addAssignees)(addAssigneesPayload);
         if (assignesResult.status !== 201) {
-            throw new Error(`Failed to create pull request. Status: ${result.status}, Message: ${result}`);
+            core.error("ERROR : Adding assignees : " + assignesResult);
         }
         const addReviewersPayload = await (0, builLabelsPayload_1.buildPRAddonsPayload)(ghPayloadRequest, result.data.number);
         const reviewersResult = await (0, sendPullRequest_1.addReviewers)(addReviewersPayload);
         if (reviewersResult.status !== 201) {
-            throw new Error(`Failed to add individual reviewers pull request. Status: ${result.status}, Message: ${result}`);
+            core.error("ERROR : Adding reviewers : " + reviewersResult);
         }
         const addTeamReviewersPayload = await (0, builLabelsPayload_1.buildPRAddonsPayload)(ghPayloadRequest, result.data.number);
         const teamReviewersResult = await (0, sendPullRequest_1.addReviewers)(addTeamReviewersPayload);
         if (teamReviewersResult.status !== 201) {
-            throw new Error(`Failed to add team reviewers. Status: ${result.status}, Message: ${result}`);
+            core.error("ERROR : Adding team review : " + teamReviewersResult);
         }
         core.setOutput("pull_request_number", result.data.number.toString());
         core.setOutput("pull_request_url", result.data.html_url);
         core.setOutput("pull_request_id", result.data.id.toString());
     }
     catch (error) {
-        core.debug("Error in action");
+        core.error("Error in action received");
         core.setFailed(error.message);
     }
 }

@@ -23,9 +23,7 @@ export async function run(): Promise<void> {
     );
     const labelsResult = await addLabels(addLabelPayload);
     if (labelsResult.status !== 200) {
-      throw new Error(
-        `Failed to add labels request. Status: ${result.status}, Message: ${result}`,
-      );
+      core.error("ERROR : Addinng labels : " + labelsResult);
     }
 
     const addAssigneesPayload = await buildPRAddonsPayload(
@@ -34,9 +32,7 @@ export async function run(): Promise<void> {
     );
     const assignesResult = await addAssignees(addAssigneesPayload);
     if (assignesResult.status !== 201) {
-      throw new Error(
-        `Failed to create pull request. Status: ${result.status}, Message: ${result}`,
-      );
+      core.error("ERROR : Adding assignees : " + assignesResult);
     }
 
     const addReviewersPayload = await buildPRAddonsPayload(
@@ -45,9 +41,7 @@ export async function run(): Promise<void> {
     );
     const reviewersResult = await addReviewers(addReviewersPayload);
     if (reviewersResult.status !== 201) {
-      throw new Error(
-        `Failed to add individual reviewers pull request. Status: ${result.status}, Message: ${result}`,
-      );
+      core.error("ERROR : Adding reviewers : " + reviewersResult);
     }
 
     const addTeamReviewersPayload = await buildPRAddonsPayload(
@@ -56,16 +50,14 @@ export async function run(): Promise<void> {
     );
     const teamReviewersResult = await addReviewers(addTeamReviewersPayload);
     if (teamReviewersResult.status !== 201) {
-      throw new Error(
-        `Failed to add team reviewers. Status: ${result.status}, Message: ${result}`,
-      );
+      core.error("ERROR : Adding team review : " + teamReviewersResult);
     }
 
     core.setOutput("pull_request_number", result.data.number.toString());
     core.setOutput("pull_request_url", result.data.html_url);
     core.setOutput("pull_request_id", result.data.id.toString());
   } catch (error) {
-    core.debug("Error in action");
+    core.error("Error in action received");
     core.setFailed((error as Error).message);
   }
 }
