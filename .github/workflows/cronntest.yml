@@ -1,5 +1,5 @@
 
-name: 🚀🚀🚀 Launch PR creator 📢📢📢
+name: ⏰⚒️🥳🤪🎟️ chronos Launch PR creator 📢📢📢
 on:
   schedule:
     - cron: '0 * * * *'
