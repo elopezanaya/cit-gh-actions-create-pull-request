@@ -1,4 +1,7 @@
 # cit-gh-actions
+This is a simple hook that creates a PR from an already checkout branch, which changes are already commit and pushed.
+
+
 
 # Documentation
 
@@ -7,10 +10,6 @@
 | Description    | Create a PR directly from the branch to the base                   |
 | Author         | elopezanaya                                                       |
 
-### Branding
-| Icon  | Color  |
-|-------|--------|
-| cloud-rain | red |
 
 ### Inputs
 | Name           | Description                                     | Required | Default                                   |
@@ -42,28 +41,61 @@
 
 
 # Sample
-name: Create Pull Request
 
+name: 🚀🚀🚀 Launch PR creator 📢📢📢
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+
+permissions: write-all
 
 jobs:
-  create_pull_request:
+  send-pull-request:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
 
-      - name: Create Pull Request
-        uses: elopezanaya/cit-gh-actions-create-pull-request/@beta
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v2
         with:
-          title: Update feature XYZ
-          body: This pull request includes updates for feature XYZ.
-          head: feature-branch
-          base: main
-          owner: your-username
-          repo: your-repository
-          author: your-name
+          ref: main
+
+      - name: Create temporary branch and chekout
+        id: create_branch
+        run: | 
+          branch_name="tmp-bump-$(date +'%m-%d-%Y-%H-%M-%S')"
+          git checkout -b "$branch_name"
+          git push --set-upstream origin "$branch_name"
+          echo "::set-output name=branch_name::$branch_name"
+
+
+      - name: Create and commit text file
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          echo "This is a sample text file." > sample.txt
+          git add sample.txt
+          git commit -m "Add sample.txt"
+          git push origin HEAD:${{ steps.create_branch.outputs.branch_name }}
+
+          
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Send PR using root action
+        uses: ./
+        id: sendPR
+        with:
+          title: 'taco shop - pull request'
+          body: 'Taco shop is a great place to eat tacos'
+          head: ${{ steps.create_branch.outputs.branch_name }}
+          base: 'main'
+          labels: 'bug, enhancement'
+          assignees: 'elopezanaya'
+          owner: 'elopezanaya'
+          repo: 'cit-gh-actions-create-pull-request'
           token: ${{ secrets.GITHUB_TOKEN }}
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          auto-merge: 'true'
+      - name : PrintOutput
+        run: | 
+          echo "The PR number is ${{ steps.sendPR.outputs.pull_request_number }}"
+          echo "The PR url is ${{ steps.sendPR.outputs.pull_request_url }}"
+          echo "The PR ID is ${{ steps.sendPR.outputs.pull_request_id }}"
