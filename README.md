@@ -35,9 +35,7 @@ This is a simple hook that creates a PR from an already checkout branch, which c
 | pull-request-url     | The URL of the pull request    |
 | pull-request-id      | Id of the PR                   |
 
-### Runs
-- Using: node20
-- Main: ./dist/index.js
+
 
 
 # Sample
