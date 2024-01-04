@@ -39,7 +39,7 @@ This is a simple hook that creates a PR from an already checkout branch, which c
 
 
 # Sample
-
+```
 name: 🚀🚀🚀 Launch PR creator 📢📢📢
 on:
   workflow_dispatch:
@@ -97,3 +97,4 @@ jobs:
           echo "The PR number is ${{ steps.sendPR.outputs.pull_request_number }}"
           echo "The PR url is ${{ steps.sendPR.outputs.pull_request_url }}"
           echo "The PR ID is ${{ steps.sendPR.outputs.pull_request_id }}"
+```
