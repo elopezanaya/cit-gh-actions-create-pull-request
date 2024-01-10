@@ -1,8 +1,6 @@
 
 name: ⏰⚒️🥳🤪🎟️ chronos Launch PR creator 📢📢📢
-on:
-  schedule:
-    - cron: '0 * * * *'
+
 
 permissions: write-all
 
